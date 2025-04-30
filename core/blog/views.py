@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, CreateView,UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
 from .forms import TaskForm
 
@@ -43,4 +43,8 @@ class TaskEditView(UpdateView):
     form_class = TaskForm
     success_url = '/blog/task/'
     
+    
+class TaskDeleteView(DeleteView):
+    model = Task
+    success_url = '/blog/task/'
     

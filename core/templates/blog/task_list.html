@@ -12,6 +12,9 @@
        <a href="{% url 'blog:task-edit' pk=task.id %}">
         <h5>Edit</h5>
        </a>
+       <a href="{% url 'blog:task-delete' pk=task.id %}">
+        <h5>Delete</h5>
+       </a>
         <li>{{task.description}}</li>
     </ul>
    {% endfor %}
