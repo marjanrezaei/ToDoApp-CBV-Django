@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from .models import Task
+from .forms import TaskForm
 
 # Create your views here.
 class BaseView(TemplateView):
@@ -24,5 +25,13 @@ class TaskListView(ListView):
 
 class TaskDetailView(DetailView):
     model = Task
+    
+    
+class TaskCreateView(CreateView):
+    model = Task
+    # fields = ['author', 'title', 'description', 'completed']
+    form_class = TaskForm
+    success_url = '/blog/task/'
+    
     
     
