@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Task
 
 # Create your views here.
@@ -20,4 +20,9 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
     paginate_by = 2  
     ordering = '-id'
+    
+
+class TaskDetailView(DetailView):
+    model = Task
+    
     

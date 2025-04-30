@@ -8,7 +8,7 @@
 <body>
    {% for task in tasks %}
     <ul>
-        <li>{{task.title}}</li>
+       <a href="{% url 'blog:task-detail' pk=task.id %}"><li>{{task.title}}</li></a>
         <li>{{task.description}}</li>
     </ul>
    {% endfor %}
