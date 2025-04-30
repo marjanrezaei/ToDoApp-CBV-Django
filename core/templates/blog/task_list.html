@@ -9,6 +9,9 @@
    {% for task in tasks %}
     <ul>
        <a href="{% url 'blog:task-detail' pk=task.id %}"><li>{{task.title}}</li></a>
+       <a href="{% url 'blog:task-edit' pk=task.id %}">
+        <h5>Edit</h5>
+       </a>
         <li>{{task.description}}</li>
     </ul>
    {% endfor %}
