@@ -33,5 +33,10 @@ class TaskCreateView(CreateView):
     form_class = TaskForm
     success_url = '/blog/task/'
     
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+        
+    
     
     
