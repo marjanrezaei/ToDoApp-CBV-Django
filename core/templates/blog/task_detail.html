@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Task detail{% endblock %}
+{% block content %}
+
     <div>
         <ul>
             <li>{{object.title}}</li>
@@ -15,5 +12,5 @@
             <li>{{object.completed}}</li>
         </ul>
     </div>
-</body>
-</html>
+
+{% endblock %}

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Task list{% endblock %}
+
+{% block content %}
+
    {% for task in tasks %}
     <ul>
        <a href="{% url 'blog:task-detail' pk=task.id %}"><li>{{task.title}}</li></a>
@@ -17,11 +15,8 @@
        </a>
        <li>first name: {{ task.author.first_name }}</li>
         <li>{{task.description}}</li>
-    </ul>
+    </ul><hr>
    {% endfor %}
-</body>
-</html>
-
 
 <div class="pagination">
     <span class="step-links">
@@ -40,3 +35,4 @@
         {% endif %}
     </span>
 </div>
+{% endblock %}
