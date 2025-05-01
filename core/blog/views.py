@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
 from .forms import TaskForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class BaseView(TemplateView):
@@ -16,18 +17,18 @@ class BaseView(TemplateView):
         return context
     
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
     paginate_by = 2  
     ordering = '-id'
     
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     
     
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     # fields = ['author', 'title', 'description', 'completed']
     form_class = TaskForm
@@ -38,13 +39,13 @@ class TaskCreateView(CreateView):
         return super().form_valid(form)
         
     
-class TaskEditView(UpdateView):
+class TaskEditView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     success_url = '/blog/task/'
     
     
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = '/blog/task/'
     
