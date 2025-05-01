@@ -1,0 +1,84 @@
+/* styles.css */
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light gray background for a clean look */
+    color: #343a40; /* Dark gray text for better readability */
+}
+
+/* Navbar Customizations */
+.navbar {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #007bff; /* Custom blue color */
+}
+
+.navbar-brand:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+.nav-link {
+    color: #343a40; /* Neutral text color */
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff; /* Blue hover effect */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #e9ecef; /* Light gray footer background */
+    padding: 15px 0;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Content Container */
+.container {
+    background-color: #ffffff; /* White background for content */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for content blocks */
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Dropdown Menu Customizations */
+.dropdown-menu {
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for dropdown */
+}
+
+/.dropdown-item {
+    color: #343a40;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #007bff; /* Highlight on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+/* Buttons */
+.btn {
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-nav .nav-item {
+        text-align: center;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
