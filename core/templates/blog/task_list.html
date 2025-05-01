@@ -15,6 +15,7 @@
        <a href="{% url 'blog:task-delete' pk=task.id %}">
         <h5>Delete</h5>
        </a>
+       <li>first name: {{ task.author.first_name }}</li>
         <li>{{task.description}}</li>
     </ul>
    {% endfor %}
