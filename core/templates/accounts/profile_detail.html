@@ -1,0 +1,4 @@
+<h1>Welcome, {{ profile.first_name }}</h1>
+<p>Email: {{ profile.user.email }}</p>
+<p>Joined on: {{ profile.user.created_date }}</p>
+<li><a class="dropdown-item" href="{% url 'accounting:profile_edit' %}">Edit Profile</a></li>
