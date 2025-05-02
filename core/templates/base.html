@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'blog:base-view' %}">To-Do App</a>
+            <a class="navbar-brand">To-Do App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,12 +31,14 @@
                 </ul>
                 <!-- Login Section -->
                 <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
+                    {% if  request.session.first_name %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Welcome,{{ names.first_name }}</a>
+                           <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               Welcome, {{ request.session.first_name }}
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                                 <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'accounting:profile_edit' %}">MyProfile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                             </ul>
                         </li>
@@ -45,14 +47,14 @@
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                            <a class="nav-link" href="{% url 'accounting:signup' %}">Sign Up</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-
+    
     <div class="container mt-4">
         {% block content %}
         <!-- Content specific to each page will go here -->
