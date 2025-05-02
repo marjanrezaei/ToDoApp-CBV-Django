@@ -1,8 +1,13 @@
+{% extends 'base.html' %}
 
-
-<form method="post">
-{% csrf_token %}
-<p>Are you sure you want to delete "{{ object }}"</p>
-<input type="submit" value="Confirm">
-
-</form>
+{% block title %}Delete{% endblock %}
+{% block content %}
+<div class="confirm-box">
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        <a href="{% url 'blog:task-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

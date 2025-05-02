@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Task detail{% endblock %}
+{% block title %}Task Detail{% endblock %}
 {% block content %}
-
-    <div>
-        <ul>
-            <li>{{object.title}}</li>
-            <li>{{object.author}}</li>
-            <li>{{object.created_at}}</li>
-            <li>{{object.description}}</li>
-            <li>{{object.completed}}</li>
+    <div class="task-container">
+        <h2>{{ object.title }}</h2>
+        <ul class="task-details">
+            <li><strong>Author:</strong> {{ object.author }}</li>
+            <li><strong>Created At:</strong> {{ object.created_at|date:"Y-m-d H:i" }}</li>
+            <li><strong>Description:</strong> {{ object.description }}</li>
+            <li><strong>Status:</strong> {% if object.completed %} ✅ Completed {% else %} ⏳ Pending {% endif %}</li>
         </ul>
     </div>
-
 {% endblock %}

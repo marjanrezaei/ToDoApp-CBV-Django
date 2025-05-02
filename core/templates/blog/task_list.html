@@ -1,38 +1,34 @@
 {% extends 'base.html' %}
 
-{% block title %}Task list{% endblock %}
+{% block title %}Task List{% endblock %}
 
 {% block content %}
+    <div class="task-container">
+        {% for task in tasks %}
+            <div class="task-card">
+                <h3><a href="{% url 'blog:task-detail' pk=task.id %}">{{ task.title }}</a></h3>
+                <p><strong>Author:</strong> {{ task.author.first_name }} {{ task.author.last_name }}</p>
+                <p>{{ task.description }}</p>
+                <li><strong>Status:</strong> {% if task.completed %} ✅ Completed {% else %} ⏳ Pending {% endif %}</li>
+                <div class="actions">
+                    <a href="{% url 'blog:task-edit' pk=task.id %}" class="btn edit">Edit</a>
+                    <a href="{% url 'blog:task-delete' pk=task.id %}" class="btn delete">Delete</a><hr>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-   {% for task in tasks %}
-    <ul>
-       <a href="{% url 'blog:task-detail' pk=task.id %}"><li>{{task.title}}</li></a>
-       <a href="{% url 'blog:task-edit' pk=task.id %}">
-        <h5>Edit</h5>
-       </a>
-       <a href="{% url 'blog:task-delete' pk=task.id %}">
-        <h5>Delete</h5>
-       </a>
-       <li>first name: {{ task.author.first_name }}</li>
-        <li>{{task.description}}</li>
-    </ul><hr>
-   {% endfor %}
-
-<div class="pagination">
-    <span class="step-links">
+    <div class="pagination">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1" class="btn">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn">Previous</a>
         {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        <span class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="btn">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">Last &raquo;</a>
         {% endif %}
-    </span>
-</div>
+    </div>
 {% endblock %}
