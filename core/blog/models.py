@@ -17,7 +17,7 @@ class Task(models.Model):
         return self.title
     
     def get_snippet(self):
-        return self.content[0:5]
+        return self.description[0:5]
     
     def get_absolute_api_url(self):
         return reverse('blog:api-v1:task-detail', kwargs={'pk': self.pk})

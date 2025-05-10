@@ -12,7 +12,7 @@ from .filters import TaskFilter
 class TaskModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly] 
     serializer_class = TaskSerializer 
-    queryset = Task.objects.filter(status=True)
+    queryset = Task.objects.filter(completed=True)
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description']
     ordering_fields = ['published_at']
