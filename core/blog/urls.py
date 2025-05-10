@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = "blog"
@@ -10,6 +10,6 @@ urlpatterns = [
     path('task/create/', views.TaskCreateView.as_view(), name="task-create"),
     path('task/<int:pk>/edit/', views.TaskEditView.as_view(), name="task-edit"),
     path('task/<int:pk>/delete/', views.TaskDeleteView.as_view(), name="task-delete"),
-    
+    path('api/v1/', include('blog.api.v1.urls')),
     
 ]
