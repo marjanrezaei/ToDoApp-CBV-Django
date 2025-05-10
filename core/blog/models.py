@@ -1,7 +1,5 @@
 from django.db import models
-# from accounts.models import Profile
-
-# User = get_user_model()
+from django.urls import reverse
 
 # Create your models here.
 class Task(models.Model):
@@ -17,3 +15,10 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_snippet(self):
+        return self.content[0:5]
+    
+    def get_absolute_api_url(self):
+        return reverse('blog:api-v1:task-detail', kwargs={'pk': self.pk})
+    
