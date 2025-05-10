@@ -22,14 +22,19 @@ class TaskSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         request = self.context.get('request') 
         rep = super().to_representation(instance)
-        if request.parser_context.get('kwargs').get('pk'):
-            rep.pop('snippet', None)
-            rep.pop('relative_url', None)
-            rep.pop('absolute_url', None)
-        else:
-            rep.pop('content', None)
-            return rep
+        if request and request.parser_context and request.parser_context.get('kwargs'):
+            if request.parser_context['kwargs'].get('pk'):
+                rep.pop('snippet', None)
+                rep.pop('relative_url', None)
+                rep.pop('absolute_url', None)
+            else:
+                rep.pop('description', None)
+        return rep
     
     def create(self, validated_data):
-        validated_data['author'] = Profile.objects.get(user__id = self.context.get('request').user.id)
+        user = self.context.get('request').user
+        if not user or not user.is_authenticated:
+            raise serializers.ValidationError("User must be authenticated to create a task.")
+        
+        validated_data['author'] = Profile.objects.get(user__id=user.id)
         return super().create(validated_data)

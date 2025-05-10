@@ -15,8 +15,8 @@ class TaskModelViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.filter(completed=True)
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description']
-    ordering_fields = ['published_at']
-    pagination_class = DefaultPagination
+    ordering_fields = ['updated_at']
+    pagination_class = DefaultPagination 
     filterset_class = TaskFilter
     
    

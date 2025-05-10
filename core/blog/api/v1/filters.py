@@ -9,7 +9,6 @@ class TaskFilter(filters.FilterSet):
         fields = {
             'title': ['exact', 'in'],
             'author': ['exact'],
-            'completed': ['exact'],
         }
         
         
