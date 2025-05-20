@@ -1,6 +1,14 @@
 Django==4.2
 python-decouple==3.8
 pillow
-djangorestframework
+djangorestframework==3.14
+
+# Third party modules   
 python-decouple
 django-filter
+drf-yasg[validation]
+
+# deployment modules
+
+# email third party modules
+django-mail-templated
