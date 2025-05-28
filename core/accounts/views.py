@@ -9,7 +9,7 @@ from .forms import ProfileForm
 class SignupView(FormView):
     template_name = 'registration/signup.html'
     form_class = CustomUserCreationForm
-    success_url = '/task/' # Redirect to login after successful signup
+    success_url = '/accounts/login/' # Redirect to login after successful signup
 
     def form_valid(self, form):
         form.save()  # Save the user to the database
