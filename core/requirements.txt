@@ -1,6 +1,17 @@
+# General modules 
 Django==4.2
 python-decouple==3.8
 pillow
 djangorestframework
-python-decouple
+
+
+# Third party modules   
 django-filter
+drf-yasg[validation]
+djangorestframework-simplejwt
+
+
+
+# Background process and cache
+celery
+redis
