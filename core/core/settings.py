@@ -17,6 +17,9 @@ from decouple import config
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -28,8 +31,6 @@ DATABASES = {
     }
 }
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,6 +59,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'mail_templated',
+    'rest_framework_simplejwt',
     
 ]
 
@@ -158,4 +161,18 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
 
+# email configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp4dev"
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = ""  # SMTP server username
+EMAIL_HOST_PASSWORD = ""  # SMTP server password
+EMAIL_USE_SSL = False
 
+
+REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+),
+}

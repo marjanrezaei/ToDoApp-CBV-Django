@@ -10,6 +10,9 @@ django-filter
 drf-yasg[validation]
 djangorestframework-simplejwt
 
+# email third party modules
+django-mail-templated
+
 
 
 # Background process and cache
