@@ -1,9 +1,12 @@
-from django.views.generic.edit import FormView
-from accounts.forms import CustomUserCreationForm
-from django.views.generic import DetailView, UpdateView
+from django.http import HttpResponse
+from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormView
+
+from accounts.forms import CustomUserCreationForm
 from .models import Profile
 from .forms import ProfileForm 
+from .tasks import sendEmail 
 
 
 class SignupView(FormView):
@@ -24,3 +27,13 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return Profile.objects.get(user=self.request.user)  # Get the logged-in user's profile
+
+
+def send_email(request):
+    """
+    A simple view to simulate sending an email.
+    """
+    sendEmail.delay()  # Call the Celery task to send the email asynchronously
+    
+    # Return a simple response
+    return HttpResponse("Email sent successfully!")
