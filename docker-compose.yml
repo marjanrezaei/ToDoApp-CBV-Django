@@ -1,11 +1,11 @@
 services:
-  # redis:
-  #   image: redis:latest
-  #   restart: always
-  #   container_name: redis
-  #   ports:
-  #     - "6379:6379"
-  #   command: redis-server --save 60 1 --loglevel warning
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
 
   backend:
     container_name: cbv-todo
@@ -17,17 +17,20 @@ services:
     env_file:
       - .env
     command: python manage.py runserver 0.0.0.0:8000
-  #   depends_on:
-  #     - redis
+    depends_on:
+      - redis
 
-  # worker:
-  #   build: ./core
-  #   command: celery -A core worker -l INFO
-  #   volumes:
-  #     - ./core:/app
-  #   depends_on:
-  #     - redis
-  #     - backend
+  worker:
+    build: ./core
+    command: celery -A core worker -l INFO
+    volumes:
+      - ./core:/app
+    depends_on:
+      - redis
+      - backend
+    environment:
+    - DJANGO_SETTINGS_MODULE=core.settings
+
       
   smtp4dev:
     image: rnwood/smtp4dev:v3

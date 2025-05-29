@@ -7,7 +7,7 @@ urlpatterns = [
     path('profile/', views.ProfileUpdateView.as_view(), name='profile_edit'),
     path('', include('django.contrib.auth.urls')),
     path("api/v1/", include("accounts.api.v1.urls")),
-    path("send-email/", views.send_email, name="send_email"),
+    # path("send-email/", views.send_email, name="send_email"),
 
 
 ]

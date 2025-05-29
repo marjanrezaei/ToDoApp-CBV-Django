@@ -13,6 +13,7 @@ djangorestframework-simplejwt
 # email third party modules
 django-mail-templated
 
+django_celery_beat
 
 
 # Background process and cache

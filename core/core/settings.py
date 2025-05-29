@@ -11,38 +11,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 
-# Access environment variables
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default=5432, cast=int),
-    }
-}
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4oh8+2ep(cm47-ps7shmq_=o8w$0j#qapy+b$1oo7fex!hof#$'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -61,6 +38,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'mail_templated',
     'rest_framework_simplejwt',
+    'django_celery_beat',
     
 ]
 
@@ -94,6 +72,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# Remove the duplicate DATABASES and SECRET_KEY/DEBUG definitions above.
+# Use python-decouple for sensitive/environment-specific settings.
+
+
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-4oh8+2ep(cm47-ps7shmq_=o8w$0j#qapy+b$1oo7fex!hof#$')
+DEBUG = config('DEBUG', default=True, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -102,6 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD', default='postgres'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default=5432, cast=int),
     }
 }
 
@@ -176,3 +165,6 @@ REST_FRAMEWORK = {
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 ),
 }
+
+# celery configuration
+CELERY_BROKER_URL = "redis://redis:6379/1"
